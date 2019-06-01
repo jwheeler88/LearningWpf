@@ -1,0 +1,83 @@
+﻿<Window x:Class="MyWpfApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyWpfApplication"
+        mc:Ignorable="d"
+        Title="Weekly Report - AE Projects" WindowStartupLocation="CenterScreen" Height="350" Width="525">
+    
+    <Window.Resources>
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="FontSize" Value="13"></Setter>
+        </Style>
+        <Style x:Key="DetailsTextBoxStyle">
+            <Setter Property="TextBox.BorderBrush" Value="Orange"></Setter>
+            <Setter Property="TextBox.Width" Value="600"></Setter>
+            <Setter Property="TextBox.Margin" Value="2"></Setter>
+            <Setter Property="TextBox.BorderThickness" Value="1"></Setter>
+            <Setter Property="TextBox.TextWrapping" Value="Wrap"></Setter>
+        </Style>
+        <Style x:Key="DetailsTextBlockStyle">
+            <Setter Property="TextBlock.Width" Value="90"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <DataGrid Name="ProjectsDataGrid"
+                  Background="DarkSlateGray"
+                  AutoGenerateColumns="False"
+                  ColumnWidth="*"
+                  ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer"
+                                    Binding="{Binding Customer}" />
+                <DataGridTextColumn Header="Priority"
+                                    Binding="{Binding Priority}"/>
+                <DataGridTextColumn Header="Project"
+                                    Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Lead Engineer"
+                                    Binding="{Binding LeadEngineer}"/>
+                <DataGridTextColumn Header="Supporting Engineer"
+                                    Binding="{Binding SupportingEngineer}"/>
+                <DataGridTextColumn Header="Lead Sales"
+                                    Binding="{Binding LeadSales}"/>
+                <DataGridTextColumn Header="Sales Channel"
+                                    Binding="{Binding SalesChannel}"/>
+                <DataGridTextColumn Header="Process Stage"
+                                    Binding="{Binding ProcessStage}"/>
+                <DataGridTextColumn Header="Support Level"
+                                    Binding="{Binding SupportLevel}" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Background="Beige">
+                        <StackPanel Orientation="Horizontal"
+                                    Background="Beige"
+                                    Margin="0,3,0,3">
+                            <TextBlock Text="Comments:"
+                                       Style="{StaticResource DetailsTextBlockStyle}"
+                                       Margin="2"
+                                       Padding="3,0,0,0"
+                                       TextAlignment="Justify"/>
+                            <TextBox Text="{Binding Comment}"
+                                     Style="{StaticResource DetailsTextBoxStyle}" />                          
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Background="Beige"
+                                    Margin="0,0,0,3">
+                            <TextBlock Text="Critical Issues:"
+                                       Style="{StaticResource DetailsTextBlockStyle}"
+                                       Padding="3,0,0,0"
+                                       Margin="2"
+                                       TextAlignment="Justify" />
+                            <TextBox Text="{Binding CriticalIssues}"
+                                     Style="{StaticResource DetailsTextBoxStyle}"
+                                     Foreground="Red"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>        
+    </Grid>
+</Window>
